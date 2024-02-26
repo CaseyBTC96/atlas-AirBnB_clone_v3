@@ -118,15 +118,15 @@ class HBNBCommand(cmd.Cmd):
         Create a new class instance with given keys/values and print its id.
         """
         try:
-            if not line:
-                raise SyntaxError()
-            my_list = line.split(" ")
+             if not line:
+                 raise SyntaxError()
+             my_list = line.split(" ")
 
-            kwargs = {}
-            for i in range(1, len(my_list)):
-                key, value = tuple(my_list[i].split("="))
-                if value[0] == '"':
-                    value = value.strip('"').replace("_", " ")
+             kwargs = {}
+             for i in range(1, len(my_list)):
+                 key, value = tuple(my_list[i].split("="))
+                 if value[0] == '"':
+                     value = value.strip('"').replace("_", " ")
                 else:
                     try:
                         value = eval(value)
