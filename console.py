@@ -134,13 +134,13 @@ class HBNBCommand(cmd.Cmd):
                         continue
                     kwargs[key] = value
 
-             if kwargs == {}:
-                 obj = eval(my_list[0])()
-             else:
-                 obj = eval(my_list[0])(**kwargs)
-                 storage.new(obj)
-                 print(obj.id)
-                 obj.save()
+                    if kwargs == {}:
+                        obj = eval(my_list[0])()
+                    else:
+                        obj = eval(my_list[0])(**kwargs)
+                        storage.new(obj)
+                         print(obj.id)
+                         obj.save()
 
         except SyntaxError:
             print("** class name missing **")
