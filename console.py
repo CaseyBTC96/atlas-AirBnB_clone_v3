@@ -139,8 +139,8 @@ class HBNBCommand(cmd.Cmd):
                     else:
                         obj = eval(my_list[0])(**kwargs)
                         storage.new(obj)
-                         print(obj.id)
-                         obj.save()
+                        print(obj.id)
+                        obj.save()
 
         except SyntaxError:
             print("** class name missing **")
