@@ -8,7 +8,7 @@ class FileStorage:
     __file_path = 'file.json'
     __objects = {}
 
-     def all(self, cls=None):
+    def all(self, cls=None):
         """Return a dictionary of instantiated objects in __objects.
         If a cls is specified, returns a dictionary of objects of that type.
         Otherwise, returns the __objects dictionary.
