@@ -1,6 +1,4 @@
 #!/usr/bin/python3
-
-
 """ 0. Script to start a Flask web application """
 
 
@@ -14,6 +12,7 @@ app = Flask(__name__)
 def hello_world():
     """ Returns some text. """
     return 'Hello HBNB!'
+
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000)
