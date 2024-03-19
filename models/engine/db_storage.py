@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 """Module to create a mysql engine"""
 
-import os
+from os import getenv
 from models.base_model import BaseModel, Base
 from models.user import User
 from models.state import State
@@ -12,7 +12,7 @@ from models.review import Review
 from sqlalchemy import create_engine
 from sqlalchemy.orm import scoped_session
 from sqlalchemy.orm import sessionmaker
-
+import sqlalchemy
 
 class DBStorage:
     """This class creates the engine for a mysql database
@@ -62,6 +62,22 @@ class DBStorage:
         """Delete object from the current database session"""
         if obj is not None:
             self.__session.delete(obj)
+    
+    def get(self, cls, id):
+        """A method to retrieve one object
+        Returns the object based on the class name and its ID, or
+        None if not found
+        """
+        return self.__session.query(cls).filter(cls.id == id).first()
+
+    def count(self, cls=None):
+        """A method to count the number of objects in storage
+        Returns the number of objects in storage matching the given class name
+        If no name is passed, returns the count of all objects in storage
+        """
+        if cls is None:
+            return len(self.all())
+        return len(self.all(cls))
 
     def reload(self):
         """Create tables and current database session"""
