@@ -14,11 +14,11 @@ class FileStorage:
         Otherwise, returns the __objects dictionary.
         """
         if cls is not None:
-            if type(cls) == str:
+            if isinstance(cls,str):
                 cls = eval(cls)
             cls_dict = {}
             for k, v in self.__objects.items():
-                if type(v) == cls:
+                if isinstance(v, cls):
                     cls_dict[k] = v
             return cls_dict
         return self.__objects
@@ -42,7 +42,7 @@ class FileStorage:
         None if not found
         """
         for item in self.__objects.values():
-            if item.__class__ == cls and item.id == id:
+            if isinstance(item, cls) and item.id == id:
                 return item
         return None
 
