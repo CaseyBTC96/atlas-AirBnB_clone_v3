@@ -8,7 +8,7 @@ Created on March 18 18:04:45 2024
 from os import getenv
 from flask import Flask, jsonify, Blueprint
 from models import storage
-from api.v1.views import app_views
+from api.v1.views.__init__ import app_views
 from flask_cors import CORS
 
 app = Flask(__name__)
