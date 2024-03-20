@@ -69,7 +69,7 @@ class DBStorage:
         Returns the object based on the class name and its ID, or
         None if not found
         """
-        if type(cls) == str:
+        if isinstance(cls, str):
             cls = classes.get(cls)
         if cls is None:
             return None
