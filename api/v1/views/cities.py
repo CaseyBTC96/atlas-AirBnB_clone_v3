@@ -25,7 +25,7 @@ def cities(state_id):
         return jsonify([val.to_dict() for val in state.cities])
     elif request.method == 'POST':
         post = request.get_json()
-        if post is None or not isinstance (post, dict):
+        if post is None or not isinstance(post, dict):
             return jsonify({'error': 'Not a JSON'}), 400
         elif post.get('name') is None:
             return jsonify({'error': 'Missing name'}), 400
