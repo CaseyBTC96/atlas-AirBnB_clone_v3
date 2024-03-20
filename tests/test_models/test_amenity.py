@@ -34,16 +34,21 @@ class TestDocs(unittest.TestCase):
         self.assertTrue(len(Amenity.__doc__) >= 1)
 
 
-class test_Amenity(BaseModel):
+class test_Amenity(unittest.TestCase):
     """ class that test the Amenity class """
+    self.assertTrue(len(Amenity.__doc__) >= 1)
 
-    def __init__(self, *args, **kwargs):
-        """ idk """
-        super().__init__(*args, **kwargs)
-        self.name = "Amenity"
-        self.value = Amenity
+    def setUp(self):
+        """Set up for the tests"""
+        self.amenity_instance = Amenity()
 
-    def test_name2(self):
-        """ idk """
-        new = self.value()
-        self.assertEqual(type(new.name), str)3
+    def test_name_type(self):
+        """Test if name is of type string"""
+        self.assertIsInstance(self.amenity_instance.name, str)
+
+    def test_value_type(self):
+        """Test if value is of type Amenity"""
+        self.assertIsInstance(self.amenity_instance.value, Amenity)
+
+if __name__ == '__main__':
+    unittest.main()
