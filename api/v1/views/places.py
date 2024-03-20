@@ -24,7 +24,7 @@ def places(city_id):
         return jsonify([val.to_dict() for val in city.places])
     elif request.method == 'POST':
         post = request.get_json()
-        if post is None or type(post) != dict:
+        if post is None or not isinstance(post, dict):
             return jsonify({'error': 'Not a JSON'}), 400
         elif post.get('name') is None:
             return jsonify({'error': 'Missing name'}), 400
@@ -53,7 +53,7 @@ def get_place_id(place_id):
         return jsonify({}), 200
     elif request.method == 'PUT':
         put = request.get_json()
-        if put is None or type(put) != dict:
+        if put is None or not isinstance(put, dict):
             return jsonify({'error': 'Not a JSON'}), 400
         for key, value in put.items():
             if key not in ['id', 'created_at', 'updated_at',
