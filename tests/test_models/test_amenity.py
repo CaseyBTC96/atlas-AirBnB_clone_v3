@@ -49,6 +49,7 @@ class test_Amenity(unittest.TestCase):
     def test_value_type(self):
         """Test if value is of type Amenity"""
         self.assertIsInstance(self.amenity_instance.value, Amenity)
-
-if __name__ == '__main__':
-    unittest.main()
+        
+        
+    if __name__ == '__main__':
+        unittest.main()
