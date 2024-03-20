@@ -14,18 +14,18 @@ class FileStorage:
         Otherwise, returns the __objects dictionary.
         """
         if cls is not None:
-            if type(cls) == str:
+            if isinstance(cls, str):
                 cls = eval(cls)
             cls_dict = {}
             for k, v in self.__objects.items():
-                if type(v) == cls:
+                if isinstance(v , cls):
                     cls_dict[k] = v
             return cls_dict
         return self.__objects
 
     def new(self, obj):
         """Adds new object to storage dictionary"""
-        self.all().update({obj.to_dict()['__class__'] + '.' + obj.id: obj})
+        self.all().update({f"{obj.__class__name__}.{obj.id}": obj})
 
     def save(self):
         """Saves storage dictionary to file"""
@@ -42,7 +42,7 @@ class FileStorage:
         None if not found
         """
         for item in self.__objects.values():
-            if item.__class__ == cls and item.id == id:
+            if isinstance(item, cls) and item.id == id:
                 return item
         return None
 
@@ -75,14 +75,14 @@ class FileStorage:
             with open(FileStorage.__file_path, 'r') as f:
                 temp = json.load(f)
                 for key, val in temp.items():
-                        self.all()[key] = classes[val['__class__']](**val)
+                    self.all()[key] = classes[val['__class__']](**val)
         except FileNotFoundError:
             pass
 
     def delete(self, obj=None):
         """Delete a given object from __objects, if it exists."""
         try:
-            del self.__objects["{}.{}".format(type(obj).__name__, obj.id)]
+            del self.__objects[f"{type(obj).__name__}. {obj.id}"]
         except (AttributeError, KeyError):
             pass
         
