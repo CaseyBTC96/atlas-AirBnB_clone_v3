@@ -20,7 +20,8 @@ def get_status():
 def get_stats():
     """retrieves the number of each objects by type
     """
-    objects = {"amenities": 'Amenity', "cities": 'City', "places": 'Place', "reviews": 'Review', "states": 'State', "users": 'User'}
+    objects = {"amenities": 'Amenity', "cities": 'City',
+               "places": 'Place', "reviews": 'Review', "states": 'State', "users": 'User'}
     stats = {}
     try:
         for key, value in objects.items():
