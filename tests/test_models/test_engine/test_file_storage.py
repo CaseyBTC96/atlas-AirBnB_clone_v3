@@ -124,12 +124,12 @@ class TestFileStorage(unittest.TestCase):
         state_id = new_state.id
         retrieved_state = storage.get(State, state_id)
         self.assertEqual(retrieved_state, new_state)
-        
+
     def test_count_all(self):
         """Test count method with all objects"""
         count = storage.count()
         self.assertEqual(count, len(storage.all()))
-    
+
     def test_count_by_class(self):
         """Test count method with specific class"""
         count = storage.count(State)
