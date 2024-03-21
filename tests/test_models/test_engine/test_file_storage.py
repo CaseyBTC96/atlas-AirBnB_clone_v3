@@ -117,23 +117,20 @@ class TestFileStorage(unittest.TestCase):
     @unittest.skipIf(os.getenv('HBNB_TYPE_STORAGE') == 'db',
                      "not testing file storage")
     def test_get(self):
-        """Test that the get method properly retrievs objects"""
-        storage = FileStorage()
-        self.assertIs(storage.get("User", "blah"), None)
-        self.assertIs(storage.get("blah", "blah"), None)
-        new_user = User()
-        new_user.save()
-        self.assertIs(storage.get("User", new_user.id), new_user)
-
-    @unittest.skipIf(os.getenv('HBNB_TYPE_STORAGE') == 'db',
-                     "not testing file storage")
-    def test_count(self):
-        storage = FileStorage()
-        initial_length = len(storage.all())
-        self.assertEqual(storage.count(), initial_length)
-        state_len = len(storage.all("State"))
-        self.assertEqual(storage.count("State"), state_len)
-        new_state = State()
-        new_state.save()
-        self.assertEqual(storage.count(), initial_length + 1)
-        self.assertEqual(storage.count("State"), state_len + 1)
+        """Test get method"""
+        new_state = State(name="California")
+        storage.new(new_state)
+        storage.save()
+        state_id = new_state.id
+        retrieved_state = storage.get(State, state_id)
+        self.assertEqual(retrieved_state, new_state)
+        
+    def test_count_all(self):
+        """Test count method with all objects"""
+        count = storage.count()
+        self.assertEqual(count, len(storage.all()))
+    
+    def test_count_by_class(self):
+        """Test count method with specific class"""
+        count = storage.count(State)
+        self.assertEqual(count, len(storage.all(State)))

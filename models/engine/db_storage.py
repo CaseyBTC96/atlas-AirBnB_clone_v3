@@ -63,28 +63,19 @@ class DBStorage:
         """delete from the current database session obj if not None"""
         if obj is not None:
             self.__session.delete(obj)
-
     def get(self, cls, id):
-        """A method to retrieve one object
-        Returns the object based on the class name and its ID, or
-        None if not found
-        """
-        if isinstance(cls, str):
-            cls = classes.get(cls)
-        if cls is None:
-            return None
-        return self.__session.query(cls).filter(cls.id == id).first()
-
+        """Retrieve one object"""
+        if cls and id:
+            key = "{}.{}".format(cls.__name__, id)
+            return self.__objects.get(key)
+    
+    
     def count(self, cls=None):
-        """A method to count the number of objects in storage
-        Returns the number of objects in storage matching the given class name
-        If no name is passed, returns the count of all objects in storage
-        """
-        if type(cls) is str:
-            cls = classes.get(cls)
-        if cls is None:
-            return len(self.all())
-        return len(self.all(cls))
+        """Count number of objects in storage"""
+        if cls:
+            return len([obj for obj in self.__objects.values() if type(obj) == cls])
+        else:
+            return len(self.__objects)
 
     def reload(self):
         """reloads data from the database"""

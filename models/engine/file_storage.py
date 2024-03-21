@@ -35,25 +35,18 @@ class FileStorage:
             for key, val in temp.items():
                 temp[key] = val.to_dict()
             json.dump(temp, f)
-
     def get(self, cls, id):
-        """A method to retrieve one object
-        Returns the object based on the class name and its ID, or
-        None if not found
-        """
-        for item in self.__objects.values():
-            if isinstance(item, cls) and item.id == id:
-                return item
-        return None
-
+        """Retrieve one object"""
+        if cls and id:
+            key = "{}.{}".format(cls.__name__, id)
+            return self.__objects.get(key)
+        
     def count(self, cls=None):
-        """A method to count the number of objects in storage
-        Returns the number of objects in storage matching the given class name
-        If no name is passed, returns the count of all objects in storage
-        """
-        if cls is None:
-            return len(self.all())
-        return len(self.all(cls))
+        """Count number of objects in storage"""
+        if cls:
+            return len([obj for obj in self.__objects.values() if obj.__class__ == cls])
+        else:
+            return len(self.__objects)
 
     def reload(self):
         """Loads storage dictionary from file"""
