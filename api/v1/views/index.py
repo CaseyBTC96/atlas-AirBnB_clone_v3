@@ -20,14 +20,12 @@ def get_status():
 def get_stats():
     """retrieves the number of each objects by type
     """
-    objects = {"amenities": 'Amenity',
-            "cities": 'City',
-            "places": 'Place',
-            "reviews": 'Review',
-            "states": 'State',
-            "users": 'User'
+    objects = {"amenities": 'Amenity', "cities": 'City', "places": 'Place', "reviews": 'Review', "states": 'State', "users": 'User'
     }
     stats = {}
-    for key, value in objects.items():
-        stats[key] = storage.count(value)
-    return jsonify(stats)
+    try:
+        for key, value in objects.items():
+            stats[key] = storage.count(value)
+            return jsonify(stats)
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500 
