@@ -20,7 +20,7 @@ CORS(app)
 
 @app.teardown_appcontext
 def close_db_sesion(error):
-    """ this for slash routing"""
+    """ closes the database session"""
     storage.close()
 
 
@@ -30,6 +30,11 @@ def page_not_found(e):
     404 status code response.
     """
     return jsonify({'error': 'Not found'}), 404
+
+@app_views.route('/status', methods=['GET'])
+def api_status():
+    """Returns the status of the API."""
+    return jsonify({"status": "OK"})
 
 
 if __name__ == "__main__":

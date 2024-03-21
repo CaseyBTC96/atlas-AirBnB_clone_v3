@@ -8,7 +8,6 @@ Created on Mon March 18 18:09:23 2024
 from flask import jsonify, Blueprint
 from models import storage
 from api.v1.views import app_views
-from models.state import State
 
 
 @app_views.route('/status', methods=['GET'], strict_slashes=False)
