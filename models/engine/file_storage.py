@@ -35,13 +35,15 @@ class FileStorage:
             for key, val in temp.items():
                 temp[key] = val.to_dict()
             json.dump(temp, f)
-            
     def get(self, cls, id):
         """
         Retrieve one object.
         """
         key = "{}.{}".format(cls.__name__, id)
-        return self.__objects.get(key, None)
+        if key in self.__objects:
+            return self.__objects[key]
+        else:
+            return None
     
     def count(self, cls=None):
         """
