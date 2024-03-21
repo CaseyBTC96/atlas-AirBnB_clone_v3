@@ -8,7 +8,7 @@ Created on March 18 18:04:45 2024
 from os import getenv
 from flask import Flask, jsonify, Blueprint
 from models import storage
-from api.v1.views.__init__ import app_views
+from api.v1.views import app_views
 from flask_cors import CORS
 
 app = Flask(__name__)
@@ -30,11 +30,6 @@ def page_not_found(e):
     404 status code response.
     """
     return jsonify({'error': 'Not found'}), 404
-
-@app_views.route('/status', methods=['GET'])
-def api_status():
-    """Returns the status of the API."""
-    return jsonify({"status": "OK"})
 
 
 if __name__ == "__main__":

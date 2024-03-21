@@ -17,11 +17,16 @@ def get_status():
 
 
 @app_views.route('/stats', methods=['GET'], strict_slashes=False)
-def object_status():
-    """Create an endpoint that retrieves the number of each objects by type
+def get_stats():
+    """retrieves the number of each objects by type
     """
-    objects = {"amenities": 'Amenity', "cities": 'City', "places": 'Place',
-               "reviews": 'Review', "states": 'State', "users": 'User'}
-    for key, value in objects.items():
-        objects[key] = storage.count(value)
-    return jsonify(objects)
+    objects = {"amenities": 'Amenity', "cities": 'City', "places": 'Place', "reviews": 'Review', "states": 'State', "users": 'User'
+    }
+    stats = {}
+    try:
+        for key, value in objects.items():
+            stats[key] = storage.count(value)
+            print(f"Count of {value}: {stats[key]}")
+            return jsonify(stats)
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500 
