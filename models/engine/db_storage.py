@@ -63,6 +63,7 @@ class DBStorage:
         """delete from the current database session obj if not None"""
         if obj is not None:
             self.__session.delete(obj)
+    
     def get(self, cls, id):
         """
         Retrieve one object.
@@ -77,7 +78,8 @@ class DBStorage:
         if cls:
             return self.__session.query(cls).count()
         else:
-            return sum(self.__session.query(cls).count() for cls in Base.__subclasses__())
+            return sum(self.__session.query(cls).count()
+                       for cls in Base.__subclasses__())
 
     def reload(self):
         """reloads data from the database"""
