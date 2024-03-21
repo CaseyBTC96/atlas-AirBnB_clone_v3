@@ -6,12 +6,16 @@ Created on Mon March 18  18:20:21
           Crystal
 """
 from flask import Blueprint, jsonify, request, abort
-from api.v1.views import app_views
 from models import storage
 from models.state import State
 from models.city import City
 
+app = Flask(__name__)
 
+@app.errorhandler(ValueError)
+def handle_value_error(e):
+    return jsonify({'error': 'Invalid JSON'}),400
+                    
 @app_views.route('/states/<string:state_id>/cities', methods=['GET', 'POST'],
                  strict_slashes=False)
 def cities(state_id):
