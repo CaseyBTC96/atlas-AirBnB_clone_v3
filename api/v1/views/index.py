@@ -26,6 +26,7 @@ def get_stats():
     try:
         for key, value in objects.items():
             stats[key] = storage.count(value)
+            print(f"Count of {value}: {stats[key]}")
             return jsonify(stats)
     except Exception as e:
         return jsonify({"error": str(e)}), 500 
