@@ -63,7 +63,7 @@ class DBStorage:
         """delete from the current database session obj if not None"""
         if obj is not None:
             self.__session.delete(obj)
-    
+
     def get(self, cls, id):
         """
         Retrieve one object.

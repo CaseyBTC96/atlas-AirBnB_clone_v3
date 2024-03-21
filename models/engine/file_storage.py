@@ -35,7 +35,7 @@ class FileStorage:
             for key, val in temp.items():
                 temp[key] = val.to_dict()
             json.dump(temp, f)
-    
+
     def get(self, cls, id):
         """
         Retrieve one object.
@@ -45,7 +45,7 @@ class FileStorage:
             return self.__objects[key]
         else:
             return None
-    
+
     def count(self, cls=None):
         """
         Count number of objects in storage.
