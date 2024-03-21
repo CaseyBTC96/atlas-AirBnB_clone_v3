@@ -7,6 +7,7 @@ Created on Mon March 18  18:20:21
 """
 from flask import Blueprint, jsonify, request, abort
 from models import storage
+from api.v1.views import app_views
 from models.state import State
 from models.city import City
 
