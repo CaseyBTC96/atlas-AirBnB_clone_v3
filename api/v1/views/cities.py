@@ -32,16 +32,14 @@ def cities_by_state(state_id):
         new_city.state_id = state_id
         new_city.save()
         return jsonify(new_city.to_dict()), 201
-
-
+    
 @app_views.route('/cities/<string:city_id>',
                  methods=['GET', 'PUT', 'DELETE'], strict_slashes=False)
 def city(city_id):
     """Retrieves a city object with a specific id"""
     city = storage.get('City', city_id)
     if city is None:
-        abort(404)
-        
+        abort(404) 
     if request.method == 'GET':
         return jsonify(city.to_dict())
     elif request.method == 'DELETE':
