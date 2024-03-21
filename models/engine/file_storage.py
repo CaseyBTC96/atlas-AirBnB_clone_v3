@@ -35,16 +35,20 @@ class FileStorage:
             for key, val in temp.items():
                 temp[key] = val.to_dict()
             json.dump(temp, f)
+            
     def get(self, cls, id):
-        """Retrieve one object"""
-        if cls and id:
-            key = "{}.{}".format(cls.__name__, id)
-            return self.__objects.get(key)
-        
+        """
+        Retrieve one object.
+        """
+        key = "{}.{}".format(cls.__name__, id)
+        return self.__objects.get(key, None)
+    
     def count(self, cls=None):
-        """Count number of objects in storage"""
+        """
+        Count number of objects in storage.
+        """
         if cls:
-            return len([obj for obj in self.__objects.values() if obj.__class__ == cls])
+            return sum(1 for obj in self.__objects.values() if isinstance(obj, cls))
         else:
             return len(self.__objects)
 
